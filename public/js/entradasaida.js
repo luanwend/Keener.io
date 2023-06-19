@@ -10,7 +10,6 @@ const listar=()=>{
            tdNome.innerText = element.nome_produto;
            tdNome.value=element.id;
            document.querySelectorAll("select").forEach(e=>e.appendChild(tdNome));
-           console.log(tdNome.value)
            
         });
         // const prod=document.querySelector('select option:selected').value;
@@ -18,7 +17,14 @@ const listar=()=>{
             const aa=document.getElementById("entrada").value;
             const precoU=document.getElementById("precoU");
             const precoT=document.getElementById("precoT");
-            const precoproduto=data[aa-1].valor;
+            let precoproduto=0
+            for(let i=0;i<data.length;i++){
+                
+                if (data[i].id == aa) {
+                    precoproduto=data[i].valor
+
+                  }
+            }
             precoU.value=parseFloat(precoproduto).toFixed(2);
             precoT.value=parseFloat(precoproduto).toFixed(2);
             document.getElementById("currentnumber").onchange=()=>{
@@ -35,8 +41,17 @@ const listar=()=>{
             const currentnumber=parseInt(document.getElementById("currentnumber").value);
             const precoU=document.getElementById("precoU").value;
             const precoT=document.getElementById("precoT").value;
-            const qtdestoque=data[idprod-1].quantidade
-            const nomeproduto=data[idprod-1].nome_produto
+            let qtdestoque=0
+            let nomeproduto=''
+            for(let i=0;i<data.length;i++){
+                
+                if (data[i].id == idprod) {
+                    qtdestoque=data[i].quantidade
+                    nomeproduto=data[i].nome_produto
+
+                  }
+            }
+            
             var valor=0;
 
             if(radio=="saida" && currentnumber>qtdestoque){
